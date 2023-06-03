@@ -1,6 +1,7 @@
 # Create EC2 Instance With Terraform
 
 # init Providers
+```hcl
 terraform {
   required_providers {
     aws = {
@@ -9,35 +10,47 @@ terraform {
     }
   }
 }
+```
 
 # Init AWS
+```hcl
 provider "aws" {
     region = "your-region"
     access_key = "your-access-key"
     secret_key = "your-secret-key"
 }
+```
 
 # Generate PEM File
+```hcl
 resource "tls_private_key" "rsa_4096" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
+```
 
+```hcl
 variable "key_name" {}
+```
 
 # Generate Key Pair
+```hcl
 resource "aws_key_pair" "key_pair" {
   key_name   = var.key_name
   public_key = tls_private_key.rsa_4096.public_key_openssh
 }
+```
 
 # Save PEM File
+```hcl
 resource "local_file" "private_key" {
     content = tls_private_key.rsa_4096.private_key_pem
     filename = var.key_name
 }
+```
 
 # Create a security group
+```hcl
 resource "aws_security_group" "sg_ec2" {
   name        = "sg_ec2"
   description = "Security group for EC2"
@@ -49,8 +62,10 @@ resource "aws_security_group" "sg_ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+```
 
 # Create EC2 instnace
+```hcl
 resource "aws_instance" "public_instance" {
   ami           = "ami-0f5ee92e2d63afc18"
   instance_type = "t2.micro"
@@ -61,7 +76,7 @@ resource "aws_instance" "public_instance" {
     Name = "public_instance"
   }
 }
-
+```
 
 
 # Initilize Terraform
