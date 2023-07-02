@@ -30,7 +30,9 @@ resource "tls_private_key" "rsa_4096" {
 ```
 
 ```hcl
-variable "key_name" {}
+variable "key_name" {
+  description = "Name of the SSH key pair"
+}
 ```
 
 # Generate Key Pair
@@ -68,7 +70,6 @@ resource "aws_security_group" "sg_ec2" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 }
 ```
 
@@ -83,20 +84,24 @@ resource "aws_instance" "public_instance" {
   tags = {
     Name = "public_instance"
   }
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp2"
+  }
 }
 ```
 
-
-# Initilize Terraform
+# Terraform Commands
+```hcl
+// Init Terraform
 terraform init
 
-# Review Plan
+// Review Plan
 terraform plan
 
-# Run Terraform Script
+// Run Terraform Script
 terraform apply
 
-# destroy Instance
+// Destroy Changes
 terraform destroy
-
-
+```

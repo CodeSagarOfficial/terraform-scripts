@@ -33,10 +33,6 @@ resource "aws_key_pair" "key_pair" {
 resource "local_file" "private_key" {
   content  = tls_private_key.rsa_4096.private_key_pem
   filename = var.key_name
-
-  provisioner "local-exec" {
-    command = "chmod 400 ${var.key_name}"
-  }
 }
 
 # Create a security group
