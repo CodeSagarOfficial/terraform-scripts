@@ -77,6 +77,19 @@ resource "aws_instance" "public_instance" {
   provisioner "local-exec" {
     command = "touch dynamic_inventory.ini"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo 'EC2 instance is ready.'"
+    ]
+
+    connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ubuntu"
+      private_key = tls_private_key.rsa_4096.private_key_pem
+    }
+  }
 }
 
 data "template_file" "inventory" {
