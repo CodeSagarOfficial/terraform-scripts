@@ -2,6 +2,16 @@ resource "aws_ecs_cluster" "default" {
     name = "${var.ecs_cluster_name}"
 }
 
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
+  name = "/ecs/wp-ecs-tf"
+  retention_in_days = 7
+
+  tags = {
+    Environment = "production"
+    Application = "wp"
+  }
+}
+
 data "aws_iam_role" "existing_ecs_task_execution_role" {
   name = "ecsTaskExecutionRole"
 }

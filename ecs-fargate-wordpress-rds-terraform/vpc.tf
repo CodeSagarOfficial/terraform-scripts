@@ -21,7 +21,7 @@ resource "aws_internet_gateway" "default" {
 resource "aws_subnet" "wp-public-a-tf" {
     vpc_id            = "${aws_vpc.default.id}"
     cidr_block        = "${var.public_subnet_a_cidr_block}"
-    availability_zone = "ap-southeast-2a"
+    availability_zone = "${var.zone1}"
 
     tags = {
        Name = "wp-public-a-tf"
@@ -31,7 +31,7 @@ resource "aws_subnet" "wp-public-a-tf" {
 resource "aws_subnet" "wp-public-b-tf" {
     vpc_id            = "${aws_vpc.default.id}"
     cidr_block        = "${var.public_subnet_b_cidr_block}"
-    availability_zone = "ap-southeast-2b"
+    availability_zone = "${var.zone2}"
 
     tags = {
        Name = "wp-public-b-tf"
@@ -41,7 +41,7 @@ resource "aws_subnet" "wp-public-b-tf" {
 resource "aws_subnet" "wp-public-c-tf" {
     vpc_id            = "${aws_vpc.default.id}"
     cidr_block        = "${var.public_subnet_c_cidr_block}"
-    availability_zone = "ap-southeast-2c"
+    availability_zone = "${var.zone3}"
 
     tags = {
        Name = "wp-public-c-tf"

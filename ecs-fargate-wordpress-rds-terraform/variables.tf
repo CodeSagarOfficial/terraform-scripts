@@ -1,8 +1,3 @@
-variable "region" {
-  description = "AWS Region"
-  default     = "your-region"
-}
-
 variable "aws_access_key" {
   description = "AWS access key"
   default = "your-access-key"
@@ -11,6 +6,26 @@ variable "aws_access_key" {
 variable "aws_secret_key" {
   description = "AWS secret key"
   default = "your-secret-key"
+}
+
+variable "region" {
+  description = "AWS Region"
+  default     = "us-east-1"
+}
+
+variable "zone1" {
+  description = "AWS Zone 1"
+  default     = "us-east-1a"
+}
+
+variable "zone2" {
+  description = "AWS Zone 2"
+  default     = "us-east-1b"
+}
+
+variable "zone3" {
+  description = "AWS Zone 3"
+  default     = "us-east-1c"
 }
 
 // VPC
